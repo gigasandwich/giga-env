@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="giga-env-setup.vcxproj" Id="4e4b8834-a6be-4d7d-a050-919acd3ddb9c" />
+</Solution>

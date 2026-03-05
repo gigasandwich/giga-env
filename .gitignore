@@ -30,3 +30,25 @@
 *.exe
 *.out
 *.app
+
+# Visual Studio
+.vs/
+Debug/
+Release/
+x64/
+x86/
+.sln.DotSettings
+
+*.user
+*.vcxproj.user
+*.sln.user
+
+*.VC.db
+*.VC.db-shm
+*.VC.db-wal
+ipch/
+.vscode/
+
+*.pdb
+*.ilk
+*.recipe
