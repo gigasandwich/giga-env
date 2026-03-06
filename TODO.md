@@ -1,5 +1,5 @@
 # Env var CRUD
-- [ ] READ
+- [x] READ
 - [ ] CREATE
 - [ ] UPDATE
 - [ ] DELETE
