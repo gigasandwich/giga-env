@@ -1,7 +1,7 @@
 # Env var CRUD
 - [x] READ
-- [ ] CREATE
-- [ ] UPDATE
+- [x] CREATE
+- [x] UPDATE
 - [ ] DELETE
 
 # Path Modification
