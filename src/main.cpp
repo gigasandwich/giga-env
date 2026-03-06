@@ -4,7 +4,7 @@
 std::string getEnvVar(HKEY scopeHKey, const std::string& varName);
 std::string setEnvVar(HKEY scopeHKey, const std::string& varName, const std::string& varValue);
 std::string deleteEnvVar(HKEY scopeHKey, const std::string& varName);
-void refresh();
+void refreshEnvironment();
 
 /*
     Somehow HKEY_LOCAL_MACHINE doesn't work on both Create and Read
@@ -18,7 +18,9 @@ int main() {
 	deleteEnvVar(HKEY_CURRENT_USER, varName);
 
 	varValue = getEnvVar(HKEY_CURRENT_USER, varName);
-	std::cout << varValue << std::endl; // Previous varValue is still displayed though
+	std::cout << varValue << std::endl;
+
+    refreshEnvironment();
 
     return 0;
 }
@@ -70,4 +72,17 @@ std::string deleteEnvVar(HKEY scopeHKey, const std::string& varName) {
     RegCloseKey(hKey);
 
     return varName;
+}
+
+void refreshEnvironment()
+{
+    SendMessageTimeoutA(
+        HWND_BROADCAST,
+        WM_SETTINGCHANGE,
+        0,
+        (LPARAM)"Environment",
+        SMTO_ABORTIFHUNG,
+        5000,
+        NULL
+    );
 }

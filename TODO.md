@@ -6,7 +6,7 @@
 
 - Fix
     - [x] Warnings
-    - [ ] Values still persisting after deletion
+    - [x] Values still persisting after deletion
 
 # Path Modification
 - [ ] CRUD
