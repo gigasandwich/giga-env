@@ -3,24 +3,31 @@
 
 std::string getEnvVar(HKEY scopeHKey, const std::string& varName);
 std::string setEnvVar(HKEY scopeHKey, const std::string& varName, const std::string& varValue);
+std::string deleteEnvVar(HKEY scopeHKey, const std::string& varName);
 
 /*
     Somehow HKEY_LOCAL_MACHINE doesn't work on both Create and Read
     Maybe an error about permissions ?
+
+    Also, compilation warning in main.cpp(50,102):
+    warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
 */
 int main() {
-    std::string varName = "Path";
-    std::string varValue = getEnvVar(HKEY_CURRENT_USER, varName);
+    std::string varName = "JAVA_HOME";
+    std::string  varValue = setEnvVar(HKEY_CURRENT_USER, varName, "C:\\paths\\jdk\\jdk-21.0.9");
     std::cout << varValue << std::endl;
 
-    varName = "JAVA_HOME";
-    varValue = setEnvVar(HKEY_CURRENT_USER, varName, "C:\\paths\\jdk\\jdk-21.0.9");
-    std::cout << varValue << std::endl;
+	deleteEnvVar(HKEY_CURRENT_USER, varName);
+
+	varValue = getEnvVar(HKEY_CURRENT_USER, varName);
+	std::cout << varValue << std::endl; // Previous varValue is still displayed though
+
     return 0;
 }
 
 std::string getEnvVar(HKEY scopeHKey, const std::string& varName) {
     HKEY hKey;
+
     if (RegOpenKeyExA(scopeHKey, "Environment", 0, KEY_READ, &hKey) != ERROR_SUCCESS) {
         return "";
     }
@@ -33,6 +40,7 @@ std::string getEnvVar(HKEY scopeHKey, const std::string& varName) {
     }
 
     RegCloseKey(hKey);
+
     return std::string(buffer);
 }
 
@@ -49,5 +57,19 @@ std::string setEnvVar(HKEY scopeHKey, const std::string& varName, const std::str
      */
     RegSetValueExA(hKey, varName.c_str(), 0, REG_EXPAND_SZ, (BYTE*)varValue.c_str(), varValue.size() + 1);
     RegCloseKey(hKey);
+
     return varValue;
+}
+
+std::string deleteEnvVar(HKEY scopeHKey, const std::string& varName) {
+    HKEY hKey;
+    
+    if (RegOpenKeyExA(scopeHKey, "Environment", 0, KEY_SET_VALUE, &hKey) != ERROR_SUCCESS) {
+        return ""; // TODO: throw exception ?
+    }
+
+    RegDeleteValueA(hKey, varName.c_str());
+    RegCloseKey(hKey);
+
+    return varName;
 }

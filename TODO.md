@@ -2,7 +2,11 @@
 - [x] READ
 - [x] CREATE
 - [x] UPDATE
-- [ ] DELETE
+- [x] DELETE
+
+- Fix
+    - [ ] Warnings
+    - [ ] Values still persisting after deletion
 
 # Path Modification
 - [ ] CRUD
