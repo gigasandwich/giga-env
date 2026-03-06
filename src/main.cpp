@@ -4,13 +4,17 @@
 std::string getEnvVar(HKEY scopeHKey, const std::string& varName);
 std::string setEnvVar(HKEY scopeHKey, const std::string& varName, const std::string& varValue);
 
+/*
+    Somehow HKEY_LOCAL_MACHINE doesn't work on both Create and Read
+    Maybe an error about permissions ?
+*/
 int main() {
     std::string varName = "Path";
-    std::string varValue = getEnvVar(HKEY_LOCAL_MACHINE, varName);
+    std::string varValue = getEnvVar(HKEY_CURRENT_USER, varName);
     std::cout << varValue << std::endl;
 
     varName = "JAVA_HOME";
-    varValue = setEnvVar(HKEY_LOCAL_MACHINE, varName, "C:\\paths\\jdk\\jdk-21.0.9");
+    varValue = setEnvVar(HKEY_CURRENT_USER, varName, "C:\\paths\\jdk\\jdk-21.0.9");
     std::cout << varValue << std::endl;
     return 0;
 }
