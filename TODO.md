@@ -5,7 +5,7 @@
 - [x] DELETE
 
 - Fix
-    - [ ] Warnings
+    - [x] Warnings
     - [ ] Values still persisting after deletion
 
 # Path Modification

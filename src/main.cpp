@@ -4,13 +4,11 @@
 std::string getEnvVar(HKEY scopeHKey, const std::string& varName);
 std::string setEnvVar(HKEY scopeHKey, const std::string& varName, const std::string& varValue);
 std::string deleteEnvVar(HKEY scopeHKey, const std::string& varName);
+void refresh();
 
 /*
     Somehow HKEY_LOCAL_MACHINE doesn't work on both Create and Read
     Maybe an error about permissions ?
-
-    Also, compilation warning in main.cpp(50,102):
-    warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
 */
 int main() {
     std::string varName = "JAVA_HOME";
@@ -53,9 +51,9 @@ std::string setEnvVar(HKEY scopeHKey, const std::string& varName, const std::str
 
     /**
      * REG_EXPAND_SZ: string that may contain env vars
-     * varValue.size() + 1 because of "\0"
+     * varValue.size() + 1 because of "\0". Had to cast there too, otherwise we get a warning
      */
-    RegSetValueExA(hKey, varName.c_str(), 0, REG_EXPAND_SZ, (BYTE*)varValue.c_str(), varValue.size() + 1);
+    RegSetValueExA(hKey, varName.c_str(), 0, REG_EXPAND_SZ, (BYTE*)varValue.c_str(), static_cast<DWORD>(varValue.size() + 1));
     RegCloseKey(hKey);
 
     return varValue;
