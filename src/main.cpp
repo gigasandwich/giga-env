@@ -1,25 +1,25 @@
 #include <iostream>
 #include <windows.h>
-#include "EnvManager.h"
+#include "env/EnvVar.h"
 
+void mainTest();
 
 /*
     Somehow HKEY_LOCAL_MACHINE doesn't work on both Create and Read
     Maybe an error about permissions ?
 */
 int main() {
-    EnvManager envManager;
-
-    std::string varName = "JAVA_HOME";
-    std::string  varValue = envManager.setEnvVar(varName, "C:\\paths\\jdk\\jdk-21.0.9");
-    std::cout << varValue << std::endl;
-
-    envManager.deleteEnvVar(varName);
-
-	varValue = envManager.getEnvVar(varName);
-	std::cout << varValue << std::endl;
-
-    EnvManager::refreshEnvironment();
-
+    mainTest();
     return 0;
+}
+
+void mainTest() {
+    EnvVar var(HKEY_CURRENT_USER, "JAVA_HOME");
+    std::cout << "Current value: " << var.value << std::endl;
+
+    std::string newValue = var.setValue("C:\\paths\\jdk\\jdk-67");
+    std::cout << "New value: " << newValue << std::endl;
+
+    std::string deletedVar = var.remove();
+    std::cout << "Deleted variable: " << deletedVar << " with value: " << var.value << std::endl;
 }
