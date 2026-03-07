@@ -10,16 +10,17 @@ public:
 	EnvVar(HKEY scopeHkey, std::string name);
 	
 	std::string value; // from this->getValue();
-	std::string setValue(const std::string& value);
+	virtual std::string setValue(const std::string& value) = 0;
 
-	std::vector<std::string> getValues(); // Splitted string
+	virtual std::vector<std::string> getValues() = 0; // Splitted string version
 
-	std::string remove();
+	virtual std::string remove() = 0;
 
-	static void refreshEnvironment();
-private:
+	virtual void refreshEnvironment() = 0;
+
+protected:
 	HKEY scopeHkey;
 
 	std::string name;
-	std::string getValue(); // Unsplitted string version, only called in the constructor for perfomance reasons :)
+	virtual std::string getValue() = 0; // Unsplitted string version, only called in the constructor for performance reasons :)
 };

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <windows.h>
 #include "env/EnvVar.h"
+#include "env/EnvVarWindows.h"
 
 void mainTest();
 
@@ -14,12 +15,12 @@ int main() {
 }
 
 void mainTest() {
-    EnvVar var(HKEY_CURRENT_USER, "JAVA_HOME");
-    std::cout << "Current value: " << var.value << std::endl;
+    EnvVar* var = new EnvVarWindows(HKEY_CURRENT_USER, "JAVA_HOME");
+    std::cout << "Current value: " << var->value << std::endl;
 
-    std::string newValue = var.setValue("C:\\paths\\jdk\\jdk-67");
+    std::string newValue = var->setValue("C:\\paths\\jdk\\jdk-67");
     std::cout << "New value: " << newValue << std::endl;
 
-    std::string deletedVar = var.remove();
-    std::cout << "Deleted variable: " << deletedVar << " with value: " << var.value << std::endl;
+    // std::string deletedVar = var->remove();
+    // std::cout << "Deleted variable: " << deletedVar << " with value: " << var->value << std::endl;
 }
