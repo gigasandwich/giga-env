@@ -10,11 +10,7 @@ EnvVarWindows::EnvVarWindows(HKEY scopeHkey, std::string name) : EnvVar(scopeHke
 }
 
 std::string EnvVarWindows::getValue() {
-    HKEY hKey;
-
-    if (RegOpenKeyExA(this->scopeHkey, "Environment", 0, KEY_READ, &hKey) != ERROR_SUCCESS) {
-        return "";
-    }
+    HKEY hKey = getHkeyOrThrow(KEY_READ);
 
     char buffer[2048];
     DWORD bufferSize = sizeof(buffer);
@@ -29,11 +25,7 @@ std::string EnvVarWindows::getValue() {
 }
 
 std::string EnvVarWindows::setValue(const std::string& value) {
-    HKEY hKey;
-
-    if (RegOpenKeyExA(scopeHkey, "Environment", 0, KEY_SET_VALUE, &hKey) != ERROR_SUCCESS) {
-        return ""; // TODO: throw exception ?
-    }
+    HKEY hKey = getHkeyOrThrow(KEY_SET_VALUE);
 
     /**
      * REG_EXPAND_SZ: string that may contain env vars
@@ -47,11 +39,7 @@ std::string EnvVarWindows::setValue(const std::string& value) {
 }
 
 std::string EnvVarWindows::remove() {
-    HKEY hKey;
-
-    if (RegOpenKeyExA(scopeHkey, "Environment", 0, KEY_SET_VALUE, &hKey) != ERROR_SUCCESS) {
-        return "";
-    }
+    HKEY hKey = getHkeyOrThrow(KEY_SET_VALUE);
 
     RegDeleteValueA(hKey, this->name.c_str());
     RegCloseKey(hKey);
@@ -63,6 +51,10 @@ std::vector<std::string> EnvVarWindows::getValues() {
     return { "" };
 }
 
+/**
+ * Static methods
+ */
+
 void EnvVarWindows::refreshEnvironment() {
     SendMessageTimeoutA(
         HWND_BROADCAST,
@@ -73,4 +65,17 @@ void EnvVarWindows::refreshEnvironment() {
         5000,
         NULL
     );
+}
+
+/**
+ * Private methods
+ */
+
+HKEY EnvVarWindows::getHkeyOrThrow(REGSAM permission) {
+    HKEY hKey;
+
+    if (RegOpenKeyExA(this->scopeHkey, "Environment", 0, permission, &hKey) != ERROR_SUCCESS) {
+        throw std::runtime_error("Failed to open registry key");
+    }
+    return hKey;
 }

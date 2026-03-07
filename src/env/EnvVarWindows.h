@@ -16,4 +16,7 @@ public:
 
 protected:
 	std::string getValue() override;
+
+private:
+	HKEY getHkeyOrThrow(REGSAM permission);
 };
