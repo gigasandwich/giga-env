@@ -24,6 +24,10 @@ std::string EnvVarWindows::getValue() {
     return std::string(buffer);
 }
 
+std::vector<std::string> EnvVarWindows::getValues() {
+    return EnvVar::getValues(';');
+}
+
 std::string EnvVarWindows::setValue(const std::string& value) {
     HKEY hKey = getHkeyOrThrow(KEY_SET_VALUE);
 
@@ -45,10 +49,6 @@ std::string EnvVarWindows::remove() {
     RegCloseKey(hKey);
 
     return this->name;
-}
-
-std::vector<std::string> EnvVarWindows::getValues() {
-    return { "" };
 }
 
 /**

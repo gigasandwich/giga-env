@@ -3,6 +3,7 @@
 #include "env/EnvVar.h"
 #include "env/EnvVarWindows.h"
 
+void pathTest();
 void mainTest();
 EnvVar* getEnvVarImpl(HKEY scopeHkey, std::string name);
 
@@ -11,12 +12,21 @@ EnvVar* getEnvVarImpl(HKEY scopeHkey, std::string name);
     Maybe an error about permissions ?
 */
 int main() {
-    mainTest();
+    pathTest();
     return 0;
 }
 
+void pathTest() {
+    EnvVar* path = getEnvVarImpl(HKEY_CURRENT_USER, "PATH");
+    std::vector<std::string> v = path->getValues();
+
+    for (const std::string& s : v) {
+        std::cout << s << std::endl;
+    }
+}
+
 void mainTest() {
-    EnvVar* var = getEnvVarImpl(HKEY_CURRENT_USER, "JAVA_HOME");
+    EnvVar* var = getEnvVarImpl(HKEY_CURRENT_USER, "PATHS");
     std::cout << "Current value: " << var->value << std::endl;
 
     std::string newValue = var->setValue("C:\\paths\\jdk\\jdk-67");

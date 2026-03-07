@@ -9,9 +9,10 @@ class EnvVarWindows : public EnvVar {
 public:
 	EnvVarWindows(HKEY scopeHkey, std::string name);
 
+	std::vector<std::string> getValues();
+
 	std::string setValue(const std::string& value) override;
 	std::string remove() override;
-	std::vector<std::string> getValues() override;
 	void refreshEnvironment() override;
 
 protected:
@@ -19,4 +20,5 @@ protected:
 
 private:
 	HKEY getHkeyOrThrow(REGSAM permission);
+	std::vector<std::string> getValues(char separator);
 };
