@@ -17,6 +17,8 @@ public:
 
 	virtual std::string setValue(const std::string& value) = 0;
 
+	std::string updateName(const std::string& updated); // Uses setValue
+
 	virtual std::string remove() = 0;
 
 	virtual void refreshEnvironment() = 0;

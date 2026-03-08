@@ -17,3 +17,14 @@ std::vector<std::string> EnvVar::getValues() {
 
     return result;
 }
+
+std::string EnvVar::updateName(const std::string& updated) {
+    const std::string currentValueBackup = this->value;
+    this->remove();
+    
+    // Should be something like this = new EnvVar
+    this->name = updated;
+    this->setValue(currentValueBackup);
+
+    return updated;
+}

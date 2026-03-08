@@ -13,7 +13,7 @@ void envVarTest();
 */
 int main() {
     try {
-        pathTest();
+        envVarTest();
     } catch (const std::exception& e) {
         std::cout << "Error: " << e.what() << "\n";
     }
@@ -28,11 +28,13 @@ void pathTest() {
 }
 
 void envVarTest() {
-    EnvVar* var = getEnvVarImpl(SCOPE_CURRENT_USER, "PATHS");
+    EnvVar* var = getEnvVarImpl(SCOPE_CURRENT_USER, "NULL");
     std::cout << "Current value: " << var->value << std::endl;
 
-    std::string newValue = var->setValue("C:\\paths\\jdk\\jdk-67");
+    std::string newValue = var->setValue("null");
     std::cout << "New value: " << newValue << std::endl;
+
+    var->updateName("NOT_NULL_XD");
 
     // std::string deletedVar = var->remove();
     // std::cout << "Deleted variable: " << deletedVar << " with value: " << var->value << std::endl;
