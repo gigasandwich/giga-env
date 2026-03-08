@@ -1,7 +1,7 @@
 #include "PathVarHandler.h"
 #include "../util/util.h"
 #include "windows.h"
-#include "stdexcept"
+#include <stdexcept>
 
 PathVarHandler::PathVarHandler(int scope) {
     this->pathEnvVar = getEnvVarImpl(scope, "PATH");
@@ -12,7 +12,7 @@ std::string PathVarHandler::append(std::string newValue) {
     // Control
     for (const std::string& entry : this->values) {
         if (entry == newValue) {
-            throw new std::runtime_error("Entry already exists");
+            throw std::runtime_error("Entry already exists");
         }
     }
 
@@ -27,9 +27,8 @@ std::string PathVarHandler::append(std::string newValue) {
 std::string PathVarHandler::update(int index, std::string newValue) {
     // Control
     if (this->values[index].empty()) { // Apparently "== null" doesn't work :(
-        throw new std::runtime_error("Unexistant entry");
+        throw std::runtime_error("Unexistant entry");
     }
-    
     // Business logic
     this->values[index] = newValue;
 
@@ -41,14 +40,17 @@ std::string PathVarHandler::update(int index, std::string newValue) {
 std::string PathVarHandler::remove(int index) {
     // Control
     if (this->values[index].empty()) {
-        throw new std::runtime_error("Unexistant entry");
+        throw std::runtime_error("Entry does not exist");
     }
 
     // Business logic
+    std::string removed = this->values[index];
     this->values.erase(this->values.begin() + index);
 
     // Persist
     this->persist();
+
+    return removed;
 }
 
 std::string PathVarHandler::toString() {

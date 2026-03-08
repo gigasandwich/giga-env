@@ -15,7 +15,7 @@ int main() {
     try {
         envVarTest();
     } catch (const std::exception& e) {
-        std::cout << "Error: " << e.what() << "\n";
+        std::cerr << "Error: " << e.what() << std::endl;
     }
     return 0;
 }
