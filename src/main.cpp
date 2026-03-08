@@ -23,7 +23,7 @@ int main() {
 void pathTest() {
     PathVarHandler pathVarHandler(SCOPE_CURRENT_USER);
     std::cout << "Before: " << pathVarHandler.toString() << std::endl;
-    pathVarHandler.append("new Path");
+    pathVarHandler.update(7, "Updated name");
     std::cout << "After: " << pathVarHandler.toString() << std::endl;
 }
 

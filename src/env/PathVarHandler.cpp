@@ -19,7 +19,20 @@ std::string PathVarHandler::append(std::string newValue) {
     // Persist
     this->pathEnvVar->setValue(toString());
     this->pathEnvVar->refreshEnvironment();
-    return this->pathEnvVar->getValue(); // Should just return "this->pathEnvVar->setValue(toString())", but we have to refreshEnvironment first :P 
+    return newValue;
+}
+
+std::string PathVarHandler::update(int index, std::string newValue) {
+    if (this->values[index].empty()) { // Apparently "== null" doesn't work :(
+        throw new std::runtime_error("Unexistant entry");
+    }
+    
+    this->values[index] = newValue;
+
+    // Persist
+    this->pathEnvVar->setValue(toString());
+    this->pathEnvVar->refreshEnvironment();
+    return newValue;
 }
 
 std::string PathVarHandler::toString() {
