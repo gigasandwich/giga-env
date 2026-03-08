@@ -13,4 +13,5 @@ public:
 private:
     EnvVar* pathEnvVar;
     std::vector<std::string> values;
+    void persist();
 };

@@ -9,29 +9,32 @@ PathVarHandler::PathVarHandler(int scope) {
 }
 
 std::string PathVarHandler::append(std::string newValue) {
+    // Control
     for (const std::string& entry : this->values) {
         if (entry == newValue) {
             throw new std::runtime_error("Entry already exists");
         }
     }
+
+    // Business logic
     this->values.push_back(newValue);
 
     // Persist
-    this->pathEnvVar->setValue(toString());
-    this->pathEnvVar->refreshEnvironment();
+    this->persist();
     return newValue;
 }
 
 std::string PathVarHandler::update(int index, std::string newValue) {
+    // Control
     if (this->values[index].empty()) { // Apparently "== null" doesn't work :(
         throw new std::runtime_error("Unexistant entry");
     }
     
+    // Business logic
     this->values[index] = newValue;
 
     // Persist
-    this->pathEnvVar->setValue(toString());
-    this->pathEnvVar->refreshEnvironment();
+    this->persist();
     return newValue;
 }
 
@@ -47,4 +50,9 @@ std::string PathVarHandler::toString() {
     result.erase(result.size() - 1); // Remove last ";"
 
     return result;
+}
+
+void PathVarHandler::persist() {
+    this->pathEnvVar->setValue(toString());
+    this->pathEnvVar->refreshEnvironment();
 }
