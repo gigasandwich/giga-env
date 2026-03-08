@@ -7,6 +7,8 @@ public:
     PathVarHandler(int scope);
     
     std::vector<std::string> getValues();
+
+    std::string toString();
 private:
     EnvVar* pathEnvVar;
 };

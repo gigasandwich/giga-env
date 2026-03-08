@@ -6,7 +6,7 @@
 #include <windows.h>
 #include "../util/util.h"
 
-EnvVarWindows::EnvVarWindows(int scope, std::string name) : EnvVar(scope, name) {
+EnvVarWindows::EnvVarWindows(int scope, std::string name) : EnvVar(scope, name, ';') {
     if (scope == SCOPE_CURRENT_USER) {
         this->scopeHkey = HKEY_CURRENT_USER; // Compiler forces me to use "->" and not "." ?
     } else if (scope == SCOPE_LOCAL_MACHINE) {
@@ -30,10 +30,6 @@ std::string EnvVarWindows::getValue() {
     RegCloseKey(hKey);
 
     return std::string(buffer);
-}
-
-std::vector<std::string> EnvVarWindows::getValues() {
-    return EnvVar::getValues(';');
 }
 
 std::string EnvVarWindows::setValue(const std::string& value) {

@@ -10,3 +10,15 @@ PathVarHandler::PathVarHandler(int scope) {
 std::vector<std::string> PathVarHandler::getValues() {
     return this->pathEnvVar->getValues();
 }
+
+std::string PathVarHandler::toString() {
+    std::string result = "";
+
+    std::vector<std::string> v = this->getValues();
+
+    for (const std::string& s : v) {
+        result += s + this->pathEnvVar->separator;
+    }
+
+    return result;
+}

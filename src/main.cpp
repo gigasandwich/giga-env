@@ -18,11 +18,7 @@ int main() {
 
 void pathTest() {
     PathVarHandler pathVarHandler(SCOPE_CURRENT_USER);
-    std::vector<std::string> v = pathVarHandler.getValues();
-
-    for (const std::string& s : v) {
-        std::cout << s << std::endl;
-    }
+    std::cout << pathVarHandler.toString() << std::endl;
 }
 
 void envVarTest() {
