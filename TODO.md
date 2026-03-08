@@ -11,4 +11,4 @@
     - [x] Values still persisting after deletion
 
 # Path Modification
-- [ ] CRUD
+- [x] CRUD
