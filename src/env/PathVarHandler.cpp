@@ -20,5 +20,7 @@ std::string PathVarHandler::toString() {
         result += s + this->pathEnvVar->separator;
     }
 
+    result.erase(result.size() - 1); // Remove last ";"
+
     return result;
 }
