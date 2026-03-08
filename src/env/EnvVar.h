@@ -5,6 +5,7 @@
 #include <windows.h>
 
 // TODO: add name update
+// TODO: remove HKEY from the constructor because it's exclusive to windows
 class EnvVar {
 public:
 	EnvVar(HKEY scopeHkey, std::string name);

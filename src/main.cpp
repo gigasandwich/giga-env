@@ -1,11 +1,11 @@
 #include <iostream>
 #include <windows.h>
 #include "env/EnvVar.h"
-#include "env/EnvVarWindows.h"
+#include "env/PathVarHandler.h"
+#include "util/util.h"
 
 void pathTest();
 void mainTest();
-EnvVar* getEnvVarImpl(HKEY scopeHkey, std::string name);
 
 /*
     Somehow HKEY_LOCAL_MACHINE doesn't work on both Create and Read
@@ -17,8 +17,8 @@ int main() {
 }
 
 void pathTest() {
-    EnvVar* path = getEnvVarImpl(HKEY_CURRENT_USER, "PATH");
-    std::vector<std::string> v = path->getValues();
+    PathVarHandler pathVarHandler;
+    std::vector<std::string> v = pathVarHandler.getValues();
 
     for (const std::string& s : v) {
         std::cout << s << std::endl;
@@ -34,17 +34,4 @@ void mainTest() {
 
     // std::string deletedVar = var->remove();
     // std::cout << "Deleted variable: " << deletedVar << " with value: " << var->value << std::endl;
-}
-
-EnvVar* getEnvVarImpl(HKEY scopeHkey, std::string name) {
-    EnvVar* instance;
-    #ifdef _WIN32
-        instance = new EnvVarWindows(scopeHkey, name);
-    #elif __linux__
-        //instance = new EnvVarLinux(scopeHkey, name);
-        throw std::runtime_error("Unsupported platform"); // For now :P
-    #else
-        throw std::runtime_error("Unsupported platform");
-    #endif
-    return instance;
 }
