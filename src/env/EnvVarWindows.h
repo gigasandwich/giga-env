@@ -10,13 +10,11 @@ public:
 	EnvVarWindows(int scope, std::string name);
 
 	std::vector<std::string> getValues();
+	std::string getValue() override;
 
 	std::string setValue(const std::string& value) override;
 	std::string remove() override;
 	void refreshEnvironment() override;
-
-protected:
-	std::string getValue() override;
 
 private:
 	HKEY scopeHkey;

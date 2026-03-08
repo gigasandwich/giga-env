@@ -12,6 +12,7 @@ public:
 	EnvVar(int scope, std::string name, char separator);
 	
 	std::string value; // from this->getValue();
+	virtual std::string getValue() = 0; // Unsplitted string version, only called in the constructor for performance reasons :)
 	std::vector<std::string> getValues();
 
 	virtual std::string setValue(const std::string& value) = 0;
@@ -23,6 +24,4 @@ public:
 protected:
 	int scope;
 	std::string name;
-
-	virtual std::string getValue() = 0; // Unsplitted string version, only called in the constructor for performance reasons :)
 };

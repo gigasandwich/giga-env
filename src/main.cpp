@@ -1,8 +1,8 @@
 #include <iostream>
-#include <windows.h>
 #include "env/EnvVar.h"
 #include "env/PathVarHandler.h"
 #include "util/util.h"
+#include <stdexcept>
 
 void pathTest();
 void envVarTest();
@@ -12,14 +12,19 @@ void envVarTest();
     Maybe an error about permissions ?
 */
 int main() {
-    pathTest();
+    try {
+        pathTest();
+    } catch (const std::exception& e) {
+        std::cout << "Error: " << e.what() << "\n";
+    }
     return 0;
 }
 
 void pathTest() {
     PathVarHandler pathVarHandler(SCOPE_CURRENT_USER);
+    std::cout << "Before: " << pathVarHandler.toString() << std::endl;
     pathVarHandler.append("new Path");
-    std::cout << pathVarHandler.toString() << std::endl;
+    std::cout << "After: " << pathVarHandler.toString() << std::endl;
 }
 
 void envVarTest() {

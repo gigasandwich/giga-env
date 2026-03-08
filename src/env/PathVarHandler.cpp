@@ -17,7 +17,9 @@ std::string PathVarHandler::append(std::string newValue) {
     this->values.push_back(newValue);
 
     // Persist
-    return this->pathEnvVar->setValue(toString());
+    this->pathEnvVar->setValue(toString());
+    this->pathEnvVar->refreshEnvironment();
+    return this->pathEnvVar->getValue(); // Should just return "this->pathEnvVar->setValue(toString())", but we have to refreshEnvironment first :P 
 }
 
 std::string PathVarHandler::toString() {
