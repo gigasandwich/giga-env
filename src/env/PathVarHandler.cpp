@@ -38,6 +38,19 @@ std::string PathVarHandler::update(int index, std::string newValue) {
     return newValue;
 }
 
+std::string PathVarHandler::remove(int index) {
+    // Control
+    if (this->values[index].empty()) {
+        throw new std::runtime_error("Unexistant entry");
+    }
+
+    // Business logic
+    this->values.erase(this->values.begin() + index);
+
+    // Persist
+    this->persist();
+}
+
 std::string PathVarHandler::toString() {
     std::string result = "";
 

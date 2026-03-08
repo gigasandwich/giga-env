@@ -23,7 +23,7 @@ int main() {
 void pathTest() {
     PathVarHandler pathVarHandler(SCOPE_CURRENT_USER);
     std::cout << "Before: " << pathVarHandler.toString() << std::endl;
-    pathVarHandler.update(7, "Updated name");
+    pathVarHandler.remove(7); // Dunno why but the "After" string isn't shown 
     std::cout << "After: " << pathVarHandler.toString() << std::endl;
 }
 
