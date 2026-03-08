@@ -1,7 +1,9 @@
 # Env var CRUD
 - [x] READ
 - [x] CREATE
-- [x] UPDATE
+- UPDATE
+    - [ ] Key
+    - [x] Value
 - [x] DELETE
 
 - Fix
