@@ -3,8 +3,8 @@
 #include "../util/util.h"
 #include "windows.h"
 
-PathVarHandler::PathVarHandler() {
-    this->pathEnvVar = getEnvVarImpl(HKEY_CURRENT_USER, "PATH");
+PathVarHandler::PathVarHandler(int scope) {
+    this->pathEnvVar = getEnvVarImpl(scope, "PATH");
 }
 
 std::vector<std::string> PathVarHandler::getValues() {

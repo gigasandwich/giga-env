@@ -2,13 +2,12 @@
 
 #include <string>
 #include <vector>
-#include <windows.h>
 
 // TODO: add name update
-// TODO: remove HKEY from the constructor because it's exclusive to windows
 class EnvVar {
 public:
-	EnvVar(HKEY scopeHkey, std::string name);
+	// Expected scope values are in util/util.h
+	EnvVar(int scope, std::string name);
 	
 	std::string value; // from this->getValue();
 
@@ -21,7 +20,7 @@ public:
 	virtual void refreshEnvironment() = 0;
 
 protected:
-	HKEY scopeHkey;
+	int scope;
 
 	std::string name;
 	std::vector<std::string> getValues(char separator); // Splitted string version

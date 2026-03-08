@@ -7,7 +7,7 @@
 
 class EnvVarWindows : public EnvVar {
 public:
-	EnvVarWindows(HKEY scopeHkey, std::string name);
+	EnvVarWindows(int scope, std::string name);
 
 	std::vector<std::string> getValues();
 
@@ -19,6 +19,7 @@ protected:
 	std::string getValue() override;
 
 private:
+	HKEY scopeHkey;
 	HKEY getHkeyOrThrow(REGSAM permission);
 	std::vector<std::string> getValues(char separator);
 };

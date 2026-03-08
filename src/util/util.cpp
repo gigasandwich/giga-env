@@ -3,10 +3,10 @@
 #include "../env/EnvVarWindows.h"
 
 // TODO: remove HKEY argument because it's exclusive to windows 
-EnvVar* getEnvVarImpl(HKEY scopeHkey, std::string name) {
+EnvVar* getEnvVarImpl(int scope, std::string name) {
     EnvVar* instance;
     #ifdef _WIN32
-        instance = new EnvVarWindows(scopeHkey, name);
+        instance = new EnvVarWindows(scope, name);
     #elif __linux__
         //instance = new EnvVarLinux(scopeHkey, name);
         throw std::runtime_error("Unsupported platform"); // For now :P

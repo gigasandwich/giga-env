@@ -3,7 +3,8 @@
 
 class PathVarHandler {
 public:
-    PathVarHandler();
+    // Expected scope values are defined in util/util.h
+    PathVarHandler(int scope);
     
     std::vector<std::string> getValues();
 private:

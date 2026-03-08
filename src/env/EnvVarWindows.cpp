@@ -4,8 +4,16 @@
 #include "EnvVar.h"
 #include <vector>
 #include <windows.h>
+#include "../util/util.h"
 
-EnvVarWindows::EnvVarWindows(HKEY scopeHkey, std::string name) : EnvVar(scopeHkey, name) {
+EnvVarWindows::EnvVarWindows(int scope, std::string name) : EnvVar(scope, name) {
+    if (scope == SCOPE_CURRENT_USER) {
+        this->scopeHkey = HKEY_CURRENT_USER; // Compiler forces me to use "->" and not "." ?
+    } else if (scope == SCOPE_LOCAL_MACHINE) {
+        this->scopeHkey = HKEY_LOCAL_MACHINE;
+    } else {
+        throw std::runtime_error("Unknown scope");
+    }
     this->value = this->getValue();
 }
 

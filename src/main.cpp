@@ -5,7 +5,7 @@
 #include "util/util.h"
 
 void pathTest();
-void mainTest();
+void envVarTest();
 
 /*
     Somehow HKEY_LOCAL_MACHINE doesn't work on both Create and Read
@@ -17,7 +17,7 @@ int main() {
 }
 
 void pathTest() {
-    PathVarHandler pathVarHandler;
+    PathVarHandler pathVarHandler(SCOPE_CURRENT_USER);
     std::vector<std::string> v = pathVarHandler.getValues();
 
     for (const std::string& s : v) {
@@ -25,8 +25,8 @@ void pathTest() {
     }
 }
 
-void mainTest() {
-    EnvVar* var = getEnvVarImpl(HKEY_CURRENT_USER, "PATHS");
+void envVarTest() {
+    EnvVar* var = getEnvVarImpl(SCOPE_CURRENT_USER, "PATHS");
     std::cout << "Current value: " << var->value << std::endl;
 
     std::string newValue = var->setValue("C:\\paths\\jdk\\jdk-67");

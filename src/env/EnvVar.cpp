@@ -1,7 +1,7 @@
 #include "EnvVar.h"
 #include <sstream>
 
-EnvVar::EnvVar(HKEY scopeHkey, std::string name) : scopeHkey(scopeHkey), name(name) {
+EnvVar::EnvVar(int scope, std::string name) : scope(scope), name(name) {
     // The child classes need to set this.value in their constructor
 }
 

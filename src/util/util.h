@@ -2,4 +2,6 @@
 #include "../env/EnvVar.h"
 #include "../env/EnvVarWindows.h"
 
-EnvVar* getEnvVarImpl(HKEY scopeHkey, std::string name);
+const int SCOPE_CURRENT_USER = 10;
+const int SCOPE_LOCAL_MACHINE = 20;
+EnvVar* getEnvVarImpl(int scope, std::string name);
