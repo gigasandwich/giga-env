@@ -10,4 +10,5 @@ public:
     std::string toString(); // It's like getValues().implode() of php
 private:
     EnvVar* pathEnvVar;
+    std::vector<std::string> values;
 };

@@ -1,20 +1,18 @@
 #include "PathVarHandler.h"
-#include <vector>
 #include "../util/util.h"
 #include "windows.h"
 
 PathVarHandler::PathVarHandler(int scope) {
     this->pathEnvVar = getEnvVarImpl(scope, "PATH");
+    this->values = this->pathEnvVar->getValues();
 }
 
-std::vector<std::string> PathVarHandler::getValues() {
-    return this->pathEnvVar->getValues();
 }
 
 std::string PathVarHandler::toString() {
     std::string result = "";
 
-    std::vector<std::string> v = this->getValues();
+    std::vector<std::string> v = this->values;
 
     for (const std::string& s : v) {
         result += s + this->pathEnvVar->separator;

@@ -18,6 +18,7 @@ int main() {
 
 void pathTest() {
     PathVarHandler pathVarHandler(SCOPE_CURRENT_USER);
+    pathVarHandler.append("new Path");
     std::cout << pathVarHandler.toString() << std::endl;
 }
 
