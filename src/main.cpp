@@ -6,6 +6,7 @@
 
 void pathTest();
 void envVarTest();
+void newEnvVarWithHomeTest();
 
 /*
     Somehow HKEY_LOCAL_MACHINE doesn't work on both Create and Read
@@ -13,7 +14,7 @@ void envVarTest();
 */
 int main() {
     try {
-        envVarTest();
+        newEnvVarWithHomeTest();
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }
@@ -38,4 +39,10 @@ void envVarTest() {
 
     // std::string deletedVar = var->remove();
     // std::cout << "Deleted variable: " << deletedVar << " with value: " << var->value << std::endl;
+}
+
+void newEnvVarWithHomeTest() {
+    EnvVar* newEnvVar = getEnvVarImpl(SCOPE_CURRENT_USER, "MAVEN_HOME");
+    newEnvVar->setValue("C:\\paths\\apache\\apache-maven-3.9.11");
+    newEnvVar->addBinToPath();
 }

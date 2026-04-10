@@ -5,6 +5,7 @@
 #include <vector>
 #include <windows.h>
 #include "../util/util.h"
+#include "PathVarHandler.h"
 
 EnvVarWindows::EnvVarWindows(int scope, std::string name) : EnvVar(scope, name, ';') {
     if (scope == SCOPE_CURRENT_USER) {
@@ -83,3 +84,11 @@ HKEY EnvVarWindows::getHkeyOrThrow(REGSAM permission) {
     }
     return hKey;
 }
+
+void EnvVarWindows::addBinToPath() {
+    PathVarHandler* pathVarHandler = new PathVarHandler(this->scope); // TODO: delete these later, not now because let's focus on business logic first, optimization later
+    std::string newPathEntry = "%" + this->name + "%" + "/bin";
+    pathVarHandler->append(newPathEntry);
+}
+
+// TODO: add remove from path

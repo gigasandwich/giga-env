@@ -23,6 +23,7 @@ public:
 
 	virtual void refreshEnvironment() = 0;
 
+	virtual void addBinToPath() = 0;
 protected:
 	int scope;
 	std::string name;

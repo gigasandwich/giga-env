@@ -16,6 +16,7 @@ public:
 	std::string remove() override;
 	void refreshEnvironment() override;
 
+	void addBinToPath() override;
 private:
 	HKEY scopeHkey;
 	HKEY getHkeyOrThrow(REGSAM permission);
