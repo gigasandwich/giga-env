@@ -3,7 +3,7 @@
 What it does:
 - [x] Env var CRUD
 - [x] Path variable CRUD (since it technically contains many values)
-- [ ] Automatic *"Add to path"*
+- [x] Automatic *"Add to path"*
     - After adding a new env with the format `ENV_HOME`, add option to add to path `ENV_HOME/bin`
 - [ ] Data suggestion based on history
 - [ ] Data backup
