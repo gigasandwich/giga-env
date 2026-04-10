@@ -1,4 +1,5 @@
 #include "EnvVar.h"
+#include "PathVarHandler.h"
 #include <sstream>
 
 EnvVar::EnvVar(int scope, std::string name, char separator) : scope(scope), name(name), separator(separator) {
@@ -35,11 +36,13 @@ std::string EnvVar::remove() {
     return result;
 }
 
-std::vector<std::string> EnvVar::removeRelatedPathEntries() {
-    std::vector<std::string> result;
 std::vector<int> EnvVar::removeRelatedPathEntries() {
-    std::vector<int> indexes;
+    PathVarHandler* pathVarHandler = new PathVarHandler(this->scope);
+    std::vector<int> indexes = pathVarHandler->findIndexesOfValuesContaining(this->name);
 
-    return result;
+    for (int i : indexes) {
+        pathVarHandler->remove(i);
+    }
+
     return indexes;
 }

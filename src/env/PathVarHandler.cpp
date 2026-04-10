@@ -71,3 +71,19 @@ void PathVarHandler::persist() {
     this->pathEnvVar->setValue(toString());
     this->pathEnvVar->refreshEnvironment();
 }
+
+std::vector<int> PathVarHandler::findIndexesOfValuesContaining(std::string part) {
+    std::vector<int> result;
+
+    for (int i = 0; i < this->values.size(); i++) {
+        try {
+            if (this->values[i].find(part) != std::string::npos) {
+                throw i;
+            }
+        } catch (int index) { // :P
+            result.push_back(index);
+        }
+    }
+    
+    return result;
+}

@@ -45,4 +45,6 @@ void newEnvVarWithHomeTest() {
     EnvVar* newEnvVar = getEnvVarImpl(SCOPE_CURRENT_USER, "MAVEN_HOME");
     newEnvVar->setValue("C:\\paths\\apache\\apache-maven-3.9.13");
     newEnvVar->addBinToPath();
+
+    newEnvVar->remove();
 }
