@@ -12,3 +12,15 @@
 
 # Path Modification
 - [x] CRUD
+
+# Util
+- Automatic *"add to path"*
+    - [ ] After adding a new env with the format `ENV_HOME`, add option to add to path `ENV_HOME/bin`
+
+# Data
+- [ ] Backup of existing data (kinda like version control)
+- [ ] Suggestion at update (from the history)
+- [ ] Online backup
+
+# GUI
+- [ ] For all of the above features
