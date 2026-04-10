@@ -23,7 +23,8 @@ public:
 	
 	virtual void refreshEnvironment() = 0;
 	
-	virtual void addBinToPath() = 0;
+	virtual void addSubDirToPath(std::string subDir) = 0;
+	void addBinToPath(); // Calls addSubDirToPath 
 
 protected:
 	int scope;

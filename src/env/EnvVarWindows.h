@@ -15,7 +15,7 @@ public:
 	std::string setValue(const std::string& value) override;
 	void refreshEnvironment() override;
 	
-	void addBinToPath() override;
+	void addSubDirToPath(std::string subDir) override;
 
 private:
 	HKEY scopeHkey;

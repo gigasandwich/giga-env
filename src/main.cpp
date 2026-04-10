@@ -46,5 +46,8 @@ void newEnvVarWithHomeTest() {
     newEnvVar->setValue("C:\\paths\\apache\\apache-maven-3.9.13");
     newEnvVar->addBinToPath();
 
+    newEnvVar->addSubDirToPath("dummy-bin");
+    newEnvVar->addSubDirToPath("dummy-bin-2/something");
+
     newEnvVar->remove();
 }

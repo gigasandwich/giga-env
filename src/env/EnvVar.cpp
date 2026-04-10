@@ -40,9 +40,17 @@ std::vector<int> EnvVar::removeRelatedPathEntries() {
     PathVarHandler* pathVarHandler = new PathVarHandler(this->scope);
     std::vector<int> indexes = pathVarHandler->findIndexesOfValuesContaining(this->name);
 
-    for (int i : indexes) {
-        pathVarHandler->remove(i);
+    try {
+        for (int i : indexes) {
+            pathVarHandler->remove(i);
+        }
+    } catch (std::exception& e) {
+        // Skip existing entries
     }
 
     return indexes;
+}
+
+void EnvVar::addBinToPath() {
+    return this->addSubDirToPath("bin");
 }
