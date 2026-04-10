@@ -28,3 +28,18 @@ std::string EnvVar::updateName(const std::string& updated) {
 
     return updated;
 }
+
+std::string EnvVar::remove() {
+    std::string result = this->removeEnvEntry();
+    this->removeRelatedPathEntries();
+    return result;
+}
+
+std::vector<std::string> EnvVar::removeRelatedPathEntries() {
+    std::vector<std::string> result;
+std::vector<int> EnvVar::removeRelatedPathEntries() {
+    std::vector<int> indexes;
+
+    return result;
+    return indexes;
+}

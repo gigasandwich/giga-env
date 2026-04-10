@@ -13,12 +13,14 @@ public:
 	std::string getValue() override;
 
 	std::string setValue(const std::string& value) override;
-	std::string remove() override;
 	void refreshEnvironment() override;
-
+	
 	void addBinToPath() override;
+
 private:
 	HKEY scopeHkey;
 	HKEY getHkeyOrThrow(REGSAM permission);
 	std::vector<std::string> getValues(char separator);
+	
+	std::string removeEnvEntry() override;
 };

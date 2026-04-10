@@ -47,7 +47,7 @@ std::string EnvVarWindows::setValue(const std::string& value) {
     return this->value;
 }
 
-std::string EnvVarWindows::remove() {
+std::string EnvVarWindows::removeEnvEntry() {
     HKEY hKey = getHkeyOrThrow(KEY_SET_VALUE);
 
     RegDeleteValueA(hKey, this->name.c_str());
@@ -94,5 +94,3 @@ void EnvVarWindows::addBinToPath() {
         // Skip already existing entry
     }
 }
-
-// TODO: add remove from path

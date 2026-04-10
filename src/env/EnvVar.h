@@ -19,12 +19,15 @@ public:
 
 	std::string updateName(const std::string& updated); // Uses setValue
 
-	virtual std::string remove() = 0;
-
+	std::string remove(); // Calls both removeEnvEntry and removeRelatedPathEntries
+	
 	virtual void refreshEnvironment() = 0;
-
+	
 	virtual void addBinToPath() = 0;
+
 protected:
 	int scope;
 	std::string name;
+	virtual std::string removeEnvEntry() = 0;
+	std::vector<int> removeRelatedPathEntries();
 };
