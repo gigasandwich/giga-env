@@ -86,9 +86,13 @@ HKEY EnvVarWindows::getHkeyOrThrow(REGSAM permission) {
 }
 
 void EnvVarWindows::addBinToPath() {
-    PathVarHandler* pathVarHandler = new PathVarHandler(this->scope); // TODO: delete these later, not now because let's focus on business logic first, optimization later
-    std::string newPathEntry = "%" + this->name + "%" + "/bin";
-    pathVarHandler->append(newPathEntry);
+    try {
+        PathVarHandler* pathVarHandler = new PathVarHandler(this->scope); // TODO: delete these later, not now because let's focus on business logic first, optimization later
+        std::string newPathEntry = "%" + this->name + "%" + "/bin";
+        pathVarHandler->append(newPathEntry);
+    } catch (const std::exception& e) {
+        // Skip already existing entry
+    }
 }
 
 // TODO: add remove from path
