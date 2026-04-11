@@ -6,6 +6,7 @@
 #include <windows.h>
 #include "../../../util/util.h"
 #include "../../pathvar/PathVarHandler.h"
+#include "../../exceptions/UnexistantEntryException.h"
 
 EnvVarWindows::EnvVarWindows(int scope, std::string name) : EnvVar(scope, name, ';') {
     if (scope == SCOPE_CURRENT_USER) {
@@ -90,7 +91,7 @@ void EnvVarWindows::addSubDirToPath(std::string subDir) {
         PathVarHandler* pathVarHandler = new PathVarHandler(this->scope); // TODO: delete these later, not now because let's focus on business logic first, optimization later
         std::string newPathEntry = "%" + this->name + "%" + "/" + subDir;
         pathVarHandler->append(newPathEntry);
-    } catch (const std::exception& e) {
+    } catch (const UnexistantEntryException& e) {
         // Skip already existing entry
     }
 }

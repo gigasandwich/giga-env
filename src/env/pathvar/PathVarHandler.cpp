@@ -1,5 +1,6 @@
 #include "PathVarHandler.h"
 #include "../../util/util.h"
+#include "../exceptions/UnexistantEntryException.h"
 #include <stdexcept>
 
 PathVarHandler::PathVarHandler(int scope) {
@@ -26,20 +27,21 @@ std::string PathVarHandler::append(std::string newValue) {
 std::string PathVarHandler::update(int index, std::string newValue) {
     // Control
     if (this->values[index].empty()) { // Apparently "== null" doesn't work :(
-        throw std::runtime_error("Unexistant entry");
+        throw UnexistantEntryException();
     }
     // Business logic
     this->values[index] = newValue;
 
     // Persist
     this->persist();
+    // TODO: reupdate values after each operation
     return newValue;
 }
 
 std::string PathVarHandler::remove(int index) {
     // Control
     if (this->values[index].empty()) {
-        throw std::runtime_error("Entry does not exist");
+        throw UnexistantEntryException();
     }
 
     // Business logic
