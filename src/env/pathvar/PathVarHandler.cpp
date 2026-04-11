@@ -1,6 +1,7 @@
 #include "PathVarHandler.h"
 #include "../../util/util.h"
 #include "../exceptions/UnexistantEntryException.h"
+#include "../exceptions/ExistantEntryException.h"
 #include <stdexcept>
 
 PathVarHandler::PathVarHandler(int scope) {
@@ -12,7 +13,7 @@ std::string PathVarHandler::append(std::string newValue) {
     // Control
     for (const std::string& entry : this->values) {
         if (entry == newValue) {
-            throw std::runtime_error("Entry already exists");
+            throw ExistantEntryException();
         }
     }
 

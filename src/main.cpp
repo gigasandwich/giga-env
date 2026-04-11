@@ -24,8 +24,8 @@ int main() {
 void pathTest() {
     PathVarHandler pathVarHandler(SCOPE_CURRENT_USER);
     std::cout << "Before: " << pathVarHandler.toString() << std::endl;
-    //pathVarHandler.remove(7); // Dunno why but the "After" string isn't shown 
-    //std::cout << "After: " << pathVarHandler.toString() << std::endl;
+    pathVarHandler.append("%MAVEN_HOME%/bin/"); // Dunno why but the "After" string isn't shown, TODO: normalize "/" at the end
+    std::cout << "After: " << pathVarHandler.toString() << std::endl; // 
 }
 
 void envVarTest() {
