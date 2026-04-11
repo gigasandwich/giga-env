@@ -10,7 +10,7 @@ public:
 	EnvVarWindows(int scope, std::string name);
 
 	std::vector<std::string> getValues();
-	std::string getValue() override;
+	std::string getUpdatedValue() override;
 
 	std::string setValue(const std::string& value) override;
 	void refreshEnvironment() override;

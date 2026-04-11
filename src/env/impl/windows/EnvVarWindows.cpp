@@ -15,10 +15,10 @@ EnvVarWindows::EnvVarWindows(int scope, std::string name) : EnvVar(scope, name, 
     } else {
         throw std::runtime_error("Unknown scope");
     }
-    this->value = this->getValue();
+    this->value = this->getUpdatedValue();
 }
 
-std::string EnvVarWindows::getValue() {
+std::string EnvVarWindows::getUpdatedValue() {
     HKEY hKey = getHkeyOrThrow(KEY_READ);
 
     char buffer[2048];
