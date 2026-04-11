@@ -1,6 +1,6 @@
 #include <iostream>
 #include "env/EnvVar.h"
-#include "env/PathVarHandler.h"
+#include "env/pathvar/PathVarHandler.h"
 #include "util/util.h"
 #include <stdexcept>
 
@@ -14,7 +14,7 @@ void newEnvVarWithHomeTest();
 */
 int main() {
     try {
-        newEnvVarWithHomeTest();
+        pathTest();
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }
@@ -24,8 +24,8 @@ int main() {
 void pathTest() {
     PathVarHandler pathVarHandler(SCOPE_CURRENT_USER);
     std::cout << "Before: " << pathVarHandler.toString() << std::endl;
-    pathVarHandler.remove(7); // Dunno why but the "After" string isn't shown 
-    std::cout << "After: " << pathVarHandler.toString() << std::endl;
+    //pathVarHandler.remove(7); // Dunno why but the "After" string isn't shown 
+    //std::cout << "After: " << pathVarHandler.toString() << std::endl;
 }
 
 void envVarTest() {

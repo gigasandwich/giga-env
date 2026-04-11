@@ -19,7 +19,7 @@
 
 # Refactor
 - Project structure
-    - [ ] Folders
+    - [x] Folders
     - [ ] Namespaces
 - [ ] Code quality
 - [ ] Memory management

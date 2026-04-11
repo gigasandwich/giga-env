@@ -1,6 +1,5 @@
 #include "PathVarHandler.h"
-#include "../util/util.h"
-#include "windows.h"
+#include "../../util/util.h"
 #include <stdexcept>
 
 PathVarHandler::PathVarHandler(int scope) {

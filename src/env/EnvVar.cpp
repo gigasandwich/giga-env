@@ -1,5 +1,5 @@
 #include "EnvVar.h"
-#include "PathVarHandler.h"
+#include "pathvar/PathVarHandler.h"
 #include <sstream>
 
 EnvVar::EnvVar(int scope, std::string name, char separator) : scope(scope), name(name), separator(separator) {

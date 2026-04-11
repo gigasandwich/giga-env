@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <windows.h>
-#include "EnvVar.h"
+#include "../../EnvVar.h"
 
 class EnvVarWindows : public EnvVar {
 public:

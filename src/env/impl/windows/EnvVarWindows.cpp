@@ -1,11 +1,11 @@
 #include <string>
 #include <iostream>
 #include "EnvVarWindows.h"
-#include "EnvVar.h"
+#include "../../EnvVar.h"
 #include <vector>
 #include <windows.h>
-#include "../util/util.h"
-#include "PathVarHandler.h"
+#include "../../../util/util.h"
+#include "../../pathvar/PathVarHandler.h"
 
 EnvVarWindows::EnvVarWindows(int scope, std::string name) : EnvVar(scope, name, ';') {
     if (scope == SCOPE_CURRENT_USER) {

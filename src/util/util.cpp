@@ -1,6 +1,6 @@
 #include "windows.h"
 #include "../env/EnvVar.h"
-#include "../env/EnvVarWindows.h"
+#include "../env/impl/windows/EnvVarWindows.h"
 
 // TODO: remove HKEY argument because it's exclusive to windows 
 EnvVar* getEnvVarImpl(int scope, std::string name) {
